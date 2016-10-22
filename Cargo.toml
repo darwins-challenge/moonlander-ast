@@ -1,0 +1,12 @@
+[package]
+name = "moonlander-ast"
+version = "0.1.0"
+authors = ["Rico Huijbers <rix0rrr@gmail.com>"]
+
+[dependencies]
+rustc-serialize = "0.3"
+rand = "0.3"
+log = "*"
+
+[dependencies.moonlander-gp]
+path = "../moonlander-gp"
