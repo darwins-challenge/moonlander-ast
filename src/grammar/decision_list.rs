@@ -1,5 +1,6 @@
 use std::fmt;
 use super::*;
+use super::super::sim::*;
 use moonlander_gp::{AstNode, RandNode, clone_or_replace};
 use rand;
 
@@ -42,5 +43,17 @@ impl RandNode for DecisionList {
         DecisionList((0..len).into_iter()
                      .map(|_| (Box::new(Condition::rand(rng)), Command::rand(rng)))
                      .collect())
+    }
+}
+
+impl EvaluateToCommand for DecisionList {
+	fn evaluate(&self, sensor_data: &SensorData) -> Command {
+        let DecisionList(ref decisions) = *self;
+        for d in decisions {
+            if d.0.is_true(sensor_data) {
+                return d.1;
+            }
+        }
+        return Command::Skip;
     }
 }

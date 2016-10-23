@@ -5,10 +5,10 @@ use super::super::num::abs;
 
 pub fn evaluate_program(sensor_data: &mut SensorData, program: &EvaluateToCommand, world: &World) {
     let command = program.evaluate(sensor_data);
-    update_data(sensor_data, command, world);
+    apply_command(sensor_data, command, world);
 }
 
-fn update_data(sensor_data: &mut SensorData, command: Command, world: &World) {
+pub fn apply_command(sensor_data: &mut SensorData, command: Command, world: &World) {
     if sensor_data.hit_ground { return; }
 
     let angular_multiplier: Number = match command {

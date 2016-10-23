@@ -1,5 +1,6 @@
 use std::fmt;
 use super::*;
+use super::super::sim::*;
 use moonlander_gp::{RandNode, Number};
 use rand;
 
@@ -46,3 +47,17 @@ impl RandNode for Expression {
         ]
     }
 }
+
+impl NumericValue for Expression {
+	fn num_value(&self, sensor_data: &SensorData) -> Number {
+		match *self {
+			Expression::Constant(value)               => value,
+			Expression::Sensor(ref sensor)            => sensor.num_value(sensor_data),
+			Expression::Plus(ref left, ref right)     => left.num_value(sensor_data) + right.num_value(sensor_data),
+			Expression::Minus(ref left, ref right)    => left.num_value(sensor_data) - right.num_value(sensor_data),
+			Expression::Multiply(ref left, ref right) => left.num_value(sensor_data) * right.num_value(sensor_data),
+			Expression::Divide(ref left, ref right)   => left.num_value(sensor_data) / right.num_value(sensor_data)
+		}
+	}
+}
+

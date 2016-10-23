@@ -1,6 +1,8 @@
 use std::fmt;
-use moonlander_gp::{AstNode, RandNode};
+use moonlander_gp::{AstNode, RandNode, Number};
 use rand;
+use super::super::sim::*;
+
 
 #[derive(Debug,RustcDecodable,RustcEncodable,Clone,PartialEq,Copy)]
 pub enum Sensor {
@@ -52,3 +54,18 @@ impl RandNode for Sensor {
             ]
 	}
 }
+
+impl NumericValue for Sensor {
+    fn num_value(&self, sensor_data: &SensorData) -> Number {
+        match *self {
+            Sensor::X    => sensor_data.x,
+            Sensor::Y    => sensor_data.y,
+            Sensor::Vx   => sensor_data.vx,
+            Sensor::Vy   => sensor_data.vy,
+            Sensor::O    => sensor_data.o,
+            Sensor::W    => sensor_data.w,
+            Sensor::Fuel => sensor_data.fuel,
+        }
+    }
+}
+

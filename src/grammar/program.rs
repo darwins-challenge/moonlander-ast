@@ -1,5 +1,6 @@
 use std::fmt;
 use super::*;
+use super::super::sim::*;
 use moonlander_gp::RandNode;
 use rand;
 
@@ -34,3 +35,19 @@ impl RandNode for Program {
         ]
     }
 }
+
+impl EvaluateToCommand for Program {
+	fn evaluate(&self, sensor_data: &SensorData) -> Command {
+		match *self {
+			Program::If(ref condition, ref true_program, ref false_program) => {
+				if (*condition).is_true(sensor_data) {
+					true_program.evaluate(sensor_data)
+				} else {
+					false_program.evaluate(sensor_data)
+				}
+			},
+			Program::Command(ref command) => **command
+		}
+	}
+}
+

@@ -1,5 +1,6 @@
 use std::fmt;
 use super::*;
+use super::super::sim::*;
 use moonlander_gp::RandNode;
 use rand;
 
@@ -68,4 +69,27 @@ impl RandNode for Condition {
             2,  Condition::Equal(Box::new(Expression::rand(rng)), Box::new(Expression::rand(rng)))
         ]
     }
+}
+
+impl EvaluateToCommand for Condition {
+	fn evaluate(&self, sensor_data: &SensorData) -> Command {
+        if self.is_true(sensor_data) { Command::Thrust } else { Command::Skip }
+    }
+}
+
+impl BooleanValue for Condition {
+	fn is_true(&self, sensor_data: &SensorData) -> bool {
+		match *self {
+			Condition::True                              => true,
+			Condition::False                             => false,
+			Condition::Not(ref condition)                => !condition.is_true(sensor_data),
+			Condition::Or(ref left, ref right)           => left.is_true(sensor_data) || right.is_true(sensor_data),
+			Condition::And(ref left, ref right)          => left.is_true(sensor_data) && right.is_true(sensor_data),
+			Condition::Less(ref left, ref right)         => left.num_value(sensor_data) <  right.num_value(sensor_data),
+			Condition::LessEqual(ref left, ref right)    => left.num_value(sensor_data) <= right.num_value(sensor_data),
+			Condition::Equal(ref left, ref right)        => left.num_value(sensor_data) == right.num_value(sensor_data),
+			Condition::GreaterEqual(ref left, ref right) => left.num_value(sensor_data) >= right.num_value(sensor_data),
+			Condition::Greater(ref left, ref right)      => left.num_value(sensor_data) >  right.num_value(sensor_data),
+		}
+	}
 }
