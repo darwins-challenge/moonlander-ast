@@ -1,5 +1,6 @@
 #[macro_use]
 extern crate moonlander_gp;
+extern crate toml;
 
 #[macro_use]
 mod println_err;

@@ -1,8 +1,0 @@
-{
-    "population_size": 1000,
-    "trials_per_program": 10,
-    "tournament_size": 10,
-    "reproduce_weight": 10,
-    "mutate_weight": 20,
-    "crossover_weight": 70
-}

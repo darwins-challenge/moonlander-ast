@@ -7,6 +7,7 @@ authors = ["Rico Huijbers <rix0rrr@gmail.com>"]
 rustc-serialize = "0.3"
 rand = "0.3"
 log = "*"
+toml = "*"
 
 [dependencies.moonlander-gp]
 path = "../moonlander-gp"

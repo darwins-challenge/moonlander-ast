@@ -12,8 +12,8 @@ pub fn apply_command(sensor_data: &mut SensorData, command: Command, world: &Wor
     if sensor_data.hit_ground { return; }
 
     let angular_multiplier: Number = match command {
-        Command::Left  =>  0.2,
-        Command::Right => -0.2,
+        Command::Left  =>  1.0,
+        Command::Right => -0.1,
         _              =>  0.0
     };
     sensor_data.w += angular_multiplier * world.angular_increment;

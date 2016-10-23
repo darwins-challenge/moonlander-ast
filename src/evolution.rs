@@ -3,10 +3,10 @@ use std::ffi::OsStr;
 use std::fs::File;
 use std::path::Path;
 use rand::{Rng, StdRng};
+use toml;
 
 use moonlander_gp::{AstNode,RandNode,Population,random_population};
 use moonlander_gp::genetic::{evolve,Weights,Fitness};
-use rustc_serialize::json;
 
 #[derive(RustcDecodable)]
 pub struct EvolutionParams {
@@ -22,7 +22,7 @@ pub fn load_params<P: AsRef<OsStr> + ?Sized>(path: &P) -> EvolutionParams {
     let mut f = File::open(Path::new(path)).ok().expect(("Error opening file"));
     let mut s = String::new();
     f.read_to_string(&mut s).ok().expect("Error reading file");
-    json::decode(&s).ok().expect("Error decoding JSON")
+    toml::decode_str(&s).expect("Error decoding Toml file")
 }
 
 pub fn run_evolution<P, F, FF, S>(params: &EvolutionParams, out: &mut Write, fitness_func: &FF, selector: &S)
