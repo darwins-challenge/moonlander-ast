@@ -13,6 +13,7 @@ pub struct EvolutionParams {
     pub reproduce_weight: u32,
     pub mutate_weight: u32,
     pub crossover_weight: u32,
+    pub tree_depth: usize,
     pub start_position: StartPosition
 }
 

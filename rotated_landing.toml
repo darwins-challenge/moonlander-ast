@@ -4,6 +4,7 @@ tournament_size = 10
 reproduce_weight = 10
 mutate_weight = 20
 crossover_weight = 70
+tree_depth = 6
 
 [start_position.y]
 min = 400.0

@@ -13,7 +13,7 @@ pub fn run_evolution<P, F, FF, S>(params: &EvolutionParams, out: &mut Write, fit
           S: for<'a> Fn(&'a Population<P, F>, &mut Rng) -> &'a P
 {
     let mut rng = StdRng::new().unwrap();
-    let mut population = random_population::<P, F, StdRng>(params.population_size, &mut rng);
+    let mut population = random_population::<P, F, StdRng>(params.population_size, params.tree_depth, &mut rng);
     let weights = Weights {
         reproduce: params.reproduce_weight,
         mutate: params.mutate_weight,
