@@ -15,7 +15,7 @@ impl World {
     /// Creates a builder for `World`. it should be used in the following sense:
     ///
     /// ```
-    /// let world = ast::simulation::World::new();
+    /// let world = moonlander_ast::sim::World::new();
     /// ```
     pub fn new() -> World {
         World {

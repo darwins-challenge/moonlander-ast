@@ -1,9 +1,10 @@
 use moonlander_gp::{Fitness,ScoreCard};
-use super::sim::SensorData;
+use super::SensorData;
 
 pub type Trace = Vec<SensorData>;
 
 /// A single trace and a score for it
+#[derive(RustcEncodable)]
 pub struct LandingTrace {
     pub trace: Trace,
     pub score_card: ScoreCard

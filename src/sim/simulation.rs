@@ -58,8 +58,8 @@ pub fn apply_command(sensor_data: &mut SensorData, command: Command, world: &Wor
 mod tests {
     use super::*;
     use std::f32;
-    use data::{SensorData};
-    use structure::{Program, Command};
+    use super::super::{SensorData, World};
+    use super::super::super::grammar::{Program, Command};
 
     #[test]
     fn next_should_land_if_all_motion_is_stopped_and_near_horizon() {
@@ -67,7 +67,7 @@ mod tests {
         let program = Program::Command(Box::new(Command::Skip));
         let world = World::new();
 
-        next_program(&mut sensor_data, &program, &world);
+        evaluate_program(&mut sensor_data, &program, &world);
 
         assert!(sensor_data.landed);
     }
@@ -78,7 +78,7 @@ mod tests {
         let program = Program::Command(Box::new(Command::Thrust));
         let world = World::new();
 
-        next_program(&mut sensor_data, &program, &world);
+        evaluate_program(&mut sensor_data, &program, &world);
 
         assert!(sensor_data.vx < 0.0);
     }
@@ -89,7 +89,7 @@ mod tests {
         let program = Program::Command(Box::new(Command::Skip));
         let world = World::new();
 
-        next_program(&mut sensor_data, &program, &world);
+        evaluate_program(&mut sensor_data, &program, &world);
 
         assert!(sensor_data.x > 0.0);
         assert!(sensor_data.y > 0.0);
@@ -101,7 +101,7 @@ mod tests {
         let program = Program::Command(Box::new(Command::Skip));
         let world = World::new();
 
-        next_program(&mut sensor_data, &program, &world);
+        evaluate_program(&mut sensor_data, &program, &world);
 
         assert!(sensor_data.o > 0.0);
     }
@@ -112,7 +112,7 @@ mod tests {
         let program = Program::Command(Box::new(Command::Left));
         let world = World::new();
 
-        next_program(&mut sensor_data, &program, &world);
+        evaluate_program(&mut sensor_data, &program, &world);
 
         assert!(sensor_data.w > 0.0);
     }
@@ -123,7 +123,7 @@ mod tests {
         let program = Program::Command(Box::new(Command::Right));
         let world = World::new();
 
-        next_program(&mut sensor_data, &program, &world);
+        evaluate_program(&mut sensor_data, &program, &world);
 
         assert!(sensor_data.w < 0.0);
     }
@@ -134,7 +134,7 @@ mod tests {
         let program = Program::Command(Box::new(Command::Thrust));
         let world = World::new();
 
-        next_program(&mut sensor_data, &program, &world);
+        evaluate_program(&mut sensor_data, &program, &world);
 
         assert!(sensor_data.thrusting);
     }
@@ -145,7 +145,7 @@ mod tests {
         let program = Program::Command(Box::new(Command::Skip));
         let world = World::new();
 
-        next_program(&mut sensor_data, &program, &world);
+        evaluate_program(&mut sensor_data, &program, &world);
 
         assert!(!sensor_data.thrusting);
     }
@@ -156,7 +156,7 @@ mod tests {
         let program = Program::Command(Box::new(Command::Thrust));
         let world = World::new().with_fuel_consumption(0.01);
 
-        next_program(&mut sensor_data, &program, &world);
+        evaluate_program(&mut sensor_data, &program, &world);
 
         println!("{}", sensor_data.fuel);
         assert!(sensor_data.fuel < 1.0);
@@ -168,7 +168,7 @@ mod tests {
         let program = Program::Command(Box::new(Command::Thrust));
         let world = World::new().with_fuel_consumption(0.01);
 
-        next_program(&mut sensor_data, &program, &world);
+        evaluate_program(&mut sensor_data, &program, &world);
 
         println!("{}", sensor_data.fuel);
         assert!(sensor_data.fuel == 0.0);
@@ -180,7 +180,7 @@ mod tests {
         let program = Program::Command(Box::new(Command::Thrust));
         let world = World::new();
 
-        next_program(&mut sensor_data, &program, &world);
+        evaluate_program(&mut sensor_data, &program, &world);
 
         assert!(sensor_data.vx == 0.0);
     }

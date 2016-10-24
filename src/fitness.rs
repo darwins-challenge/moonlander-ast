@@ -1,8 +1,7 @@
 //! This module is dedicated to calculating the fitness of moon landing programs
 use moonlander_gp::{AstNode, depth, ScoreCard, Number, Fitness};
 use moonlander_gp::num::square;
-use super::sim::{SensorData, World, apply_command,EvaluateToCommand};
-use super::landing_trace::LandingTrace;
+use super::sim::{SensorData, World, apply_command,EvaluateToCommand, LandingTrace};
 use rand::Rng;
 
 pub fn score_lander<P>(program: &P, _: &mut Rng, mut sensor_data: SensorData, world: &World) -> LandingTrace

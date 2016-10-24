@@ -1,6 +1,6 @@
 use moonlander_gp::Number;
-use super::sim::SensorData;
-use super::evolution_params::{EvolutionParams, NumRange};
+use super::SensorData;
+use super::super::evolution_params::{EvolutionParams, NumRange};
 use rand;
 
 pub fn vertical_landing(rng: &mut rand::Rng) -> SensorData {

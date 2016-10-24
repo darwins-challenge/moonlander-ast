@@ -21,7 +21,7 @@ impl SensorData {
     /// Creates a builder for `SensorData`. It should be used in the following sense:
     ///
     /// ```
-    /// let sensor_data = ast::data::SensorData::new().with_y(100.0);
+    /// let sensor_data = moonlander_ast::sim::SensorData::new().with_y(100.0);
     /// ```
     pub fn new () -> SensorData {
         SensorData {
