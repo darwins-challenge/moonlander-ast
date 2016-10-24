@@ -47,7 +47,15 @@ impl NumericValue for Expression {
 			Expression::Plus(ref left, ref right)     => left.num_value(sensor_data) + right.num_value(sensor_data),
 			Expression::Minus(ref left, ref right)    => left.num_value(sensor_data) - right.num_value(sensor_data),
 			Expression::Multiply(ref left, ref right) => left.num_value(sensor_data) * right.num_value(sensor_data),
-			Expression::Divide(ref left, ref right)   => left.num_value(sensor_data) / right.num_value(sensor_data)
+			Expression::Divide(ref left, ref right)   => {
+                let right = right.num_value(sensor_data);
+                // Not correct but at least it prevents a division by zero
+                if right == 0.0 {
+                    left.num_value(sensor_data)
+                } else {
+                    left.num_value(sensor_data) / right
+                }
+            }
 		}
 	}
 }
