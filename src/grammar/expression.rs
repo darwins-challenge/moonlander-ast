@@ -1,7 +1,7 @@
 use std::fmt;
 use super::*;
 use super::super::sim::*;
-use moonlander_gp::{RandNode, Number};
+use moonlander_gp::{Number};
 use rand;
 
 #[derive(Debug,RustcDecodable,RustcEncodable,Clone,PartialEq)]
@@ -15,12 +15,16 @@ pub enum Expression {
 }
 
 impl_astnode!(Expression, 3,
-              Constant((data n)),
-              Sensor(sensor),
-              Plus(left, right),
-              Minus(left, right),
-              Multiply(left, right),
-              Divide(left, right));
+              leaf Constant((data n random_constant)),
+              leaf Sensor(sensor),
+              int Plus(left, right),
+              int Minus(left, right),
+              int Multiply(left, right),
+              int Divide(left, right));
+
+fn random_constant(rng: &mut rand::Rng) -> Number {
+        rng.next_f32() * 100.0 - 50.0
+}
 
 impl fmt::Display for Expression {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -32,19 +36,6 @@ impl fmt::Display for Expression {
             Expression::Multiply(ref l, ref r) => write!(f, "({} * {})", l, r),
             Expression::Divide(ref l, ref r)   => write!(f, "({} / {})", l, r),
         }
-    }
-}
-
-impl RandNode for Expression {
-    fn rand(rng: &mut rand::Rng) -> Self {
-        pick![rng,
-            5, Expression::Constant(rng.next_f32()),
-            5, Expression::Sensor(Box::new(Sensor::rand(rng))),
-            1, Expression::Plus(Box::new(Expression::rand(rng)), Box::new(Expression::rand(rng))),
-            1, Expression::Minus(Box::new(Expression::rand(rng)), Box::new(Expression::rand(rng))),
-            1, Expression::Multiply(Box::new(Expression::rand(rng)), Box::new(Expression::rand(rng))),
-            1, Expression::Divide(Box::new(Expression::rand(rng)), Box::new(Expression::rand(rng)))
-        ]
     }
 }
 

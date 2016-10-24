@@ -1,6 +1,5 @@
 use std::fmt;
-use moonlander_gp::{AstNode, RandNode, Number};
-use rand;
+use moonlander_gp::Number;
 use super::super::sim::*;
 
 
@@ -15,17 +14,15 @@ pub enum Sensor {
       Fuel,
 }
 
-impl AstNode for Sensor {
-    fn node_type(&self) -> usize { 0 }
+impl_astnode!(Sensor, 0,
+              leaf X(),
+              leaf Y(),
+              leaf Vx(),
+              leaf Vy(),
+              leaf O(),
+              leaf W(),
+              leaf Fuel());
 
-    fn children(&self) -> Vec<&AstNode> {
-        vec![]
-    }
-
-    fn replace_child(&self, _: &AstNode, _: &mut Option<Box<AstNode>>) -> Box<AstNode> {
-        Box::new(self.clone())
-    }
-}
 
 impl fmt::Display for Sensor {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -39,20 +36,6 @@ impl fmt::Display for Sensor {
             Sensor::W    => write!(f, "W")
         }
     }
-}
-
-impl RandNode for Sensor {
-    fn rand(rng: &mut rand::Rng) -> Self {
-        pick![rng,
-            1, Sensor::Y,
-            1, Sensor::Vy,
-            1, Sensor::Fuel,
-            1, Sensor::X,
-            1, Sensor::Vx,
-            1, Sensor::O,
-            1, Sensor::W
-            ]
-	}
 }
 
 impl NumericValue for Sensor {

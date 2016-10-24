@@ -1,8 +1,6 @@
 use std::fmt;
 use super::*;
 use super::super::sim::*;
-use moonlander_gp::RandNode;
-use rand;
 
 #[derive(Debug,RustcDecodable,RustcEncodable,Clone,PartialEq)]
 pub enum Condition {
@@ -21,16 +19,16 @@ pub enum Condition {
 }
 
 impl_astnode!(Condition, 2,
-              True(),
-              False(),
-              Not(cond),
-              Or(left, right),
-              And(left, right),
-              Less(left, right),
-              LessEqual(left, right),
-              Equal(left, right),
-              GreaterEqual(left, right),
-              Greater(left, right));
+              leaf True(),
+              leaf False(),
+              int Not(cond),
+              int Or(left, right),
+              int And(left, right),
+              int Less(left, right),
+              int LessEqual(left, right),
+              int Equal(left, right),
+              int GreaterEqual(left, right),
+              int Greater(left, right));
 
 
 impl fmt::Display for Condition {
@@ -49,25 +47,6 @@ impl fmt::Display for Condition {
             Condition::GreaterEqual(ref l, ref r) => write!(f, "({} >= {})", l, r),
             Condition::Greater(ref l, ref r)      => write!(f, "({} > {})", l, r),
         }
-    }
-}
-
-impl RandNode for Condition {
-    fn rand(rng: &mut rand::Rng) -> Self {
-        pick![rng,
-            10, Condition::True,
-            10, Condition::False,
-
-            3,  Condition::Not(Box::new(Condition::rand(rng))),
-            2,  Condition::Or(Box::new(Condition::rand(rng)), Box::new(Condition::rand(rng))),
-            2,  Condition::And(Box::new(Condition::rand(rng)), Box::new(Condition::rand(rng))),
-
-            1,  Condition::Less(Box::new(Expression::rand(rng)), Box::new(Expression::rand(rng))),
-            1,  Condition::LessEqual(Box::new(Expression::rand(rng)), Box::new(Expression::rand(rng))),
-            1,  Condition::Greater(Box::new(Expression::rand(rng)), Box::new(Expression::rand(rng))),
-            1,  Condition::GreaterEqual(Box::new(Expression::rand(rng)), Box::new(Expression::rand(rng))),
-            2,  Condition::Equal(Box::new(Expression::rand(rng)), Box::new(Expression::rand(rng)))
-        ]
     }
 }
 

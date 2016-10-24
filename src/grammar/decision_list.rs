@@ -1,7 +1,7 @@
 use std::fmt;
 use super::*;
 use super::super::sim::*;
-use moonlander_gp::{AstNode, RandNode, clone_or_replace};
+use moonlander_gp::{AstNode, RandNode, clone_or_replace, TargetHeight};
 use rand;
 
 #[derive(Debug,RustcDecodable,RustcEncodable,Clone,PartialEq)]
@@ -38,10 +38,10 @@ impl fmt::Display for DecisionList {
 }
 
 impl RandNode for DecisionList {
-    fn rand(rng: &mut rand::Rng) -> Self {
+    fn rand(weights: TargetHeight, rng: &mut rand::Rng) -> Self {
         let len = rng.next_u32() % 6 + 1;
         DecisionList((0..len).into_iter()
-                     .map(|_| (Box::new(Condition::rand(rng)), Command::rand(rng)))
+                     .map(|_| (weights.gen_child(rng), Command::rand(weights.next_level(), rng)))
                      .collect())
     }
 }
