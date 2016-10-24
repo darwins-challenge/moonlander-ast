@@ -13,5 +13,6 @@ pub mod sim;
 pub mod num;
 pub mod landing_trace;
 pub mod evolution;
+pub mod evolution_params;
 pub mod fitness;
 pub mod initial_state;
