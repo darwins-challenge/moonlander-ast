@@ -36,7 +36,7 @@ pub fn score_lander<P>(program: &P, _: &mut Rng, mut sensor_data: SensorData, wo
             ("success_bonus",    if sensor_data.landed { 10000.0 } else { 0.0 }),
             ("rotation_penalty",  total_o * -1.0),
             ("end_rotation_penalty",  square(sensor_data.o) * -100.0),
-            ("complexity_pentalty", square(depth(program) as f32) * -0.0001)
+            ("complexity_pentalty", square(depth(program) as f32) * -0.001)
         ])
     }
 }
