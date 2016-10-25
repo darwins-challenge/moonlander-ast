@@ -1,4 +1,3 @@
-use std::fmt;
 use super::*;
 use super::super::sim::*;
 use moonlander_gp::{AstNode, RandNode, clone_or_replace, TargetHeight};
@@ -24,16 +23,6 @@ impl AstNode for DecisionList {
                         clone_or_replace(cond.as_ref(), old_child, new_child), then.clone()))
                 .collect();
         Box::new(DecisionList(list))
-    }
-}
-
-impl fmt::Display for DecisionList {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let DecisionList(ref decisions) = *self;
-        for d in decisions {
-            try!(writeln!(f, "{} -> {}", d.0, d.1));
-        }
-        Ok(())
     }
 }
 

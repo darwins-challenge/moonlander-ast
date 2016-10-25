@@ -1,4 +1,3 @@
-use std::fmt;
 use super::*;
 use super::super::sim::*;
 
@@ -30,25 +29,6 @@ impl_astnode!(Condition, 2,
               int GreaterEqual(left, right),
               int Greater(left, right));
 
-
-impl fmt::Display for Condition {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match *self {
-            Condition::True                       => write!(f, "True"),
-            Condition::False                      => write!(f, "False"),
-
-            Condition::Not(ref c)                 => write!(f, "!{}", c),
-            Condition::Or(ref l, ref r)           => write!(f, "({} || {})", l, r),
-            Condition::And(ref l, ref r)          => write!(f, "({} && {})", l, r),
-
-            Condition::Less(ref l, ref r)         => write!(f, "({} < {})", l, r),
-            Condition::LessEqual(ref l, ref r)    => write!(f, "({} <= {})", l, r),
-            Condition::Equal(ref l, ref r)        => write!(f, "({} == {})", l, r),
-            Condition::GreaterEqual(ref l, ref r) => write!(f, "({} >= {})", l, r),
-            Condition::Greater(ref l, ref r)      => write!(f, "({} > {})", l, r),
-        }
-    }
-}
 
 impl EvaluateToCommand for Condition {
 	fn evaluate(&self, sensor_data: &SensorData) -> Command {

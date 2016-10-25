@@ -1,4 +1,3 @@
-use std::fmt;
 use super::*;
 use super::super::sim::*;
 
@@ -11,15 +10,6 @@ pub enum Program {
 impl_astnode!(Program, 4,
               int If(cond, one, two),
               leaf Command(command));
-
-impl fmt::Display for Program {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match *self {
-            Program::If(ref cond, ref one, ref two) => write!(f, "({} then {} else {})", cond, one, two),
-            Program::Command(ref command) => write!(f, "{}", command)
-        }
-    }
-}
 
 impl EvaluateToCommand for Program {
 	fn evaluate(&self, sensor_data: &SensorData) -> Command {

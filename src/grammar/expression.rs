@@ -1,4 +1,3 @@
-use std::fmt;
 use super::*;
 use super::super::sim::*;
 use moonlander_gp::{Number};
@@ -24,19 +23,6 @@ impl_astnode!(Expression, 3,
 
 fn random_constant(rng: &mut rand::Rng) -> Number {
         rng.next_f32() * 100.0 - 50.0
-}
-
-impl fmt::Display for Expression {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match *self {
-            Expression::Constant(ref n)        => write!(f, "{}", n),
-            Expression::Sensor(ref s)          => write!(f, "{}", s),
-            Expression::Plus(ref l, ref r)     => write!(f, "({} + {})", l, r),
-            Expression::Minus(ref l, ref r)    => write!(f, "({} - {})", l, r),
-            Expression::Multiply(ref l, ref r) => write!(f, "({} * {})", l, r),
-            Expression::Divide(ref l, ref r)   => write!(f, "({} / {})", l, r),
-        }
-    }
 }
 
 impl NumericValue for Expression {
