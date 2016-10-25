@@ -50,7 +50,7 @@ pub fn score_lander_multi<P, G>(n: usize, program: &P, rng: &mut Rng, sensor_dat
         let initial = sensor_data_fn(rng);
         let trace = score_lander(program, rng, initial, world);
         total_score += trace.score_card();
-        if trace.score_card() > best_trace.score_card() {
+        if trace.score_card() > best_trace.score_card() || best_trace.score_card().is_empty() {
             best_trace = trace;
         }
     }
