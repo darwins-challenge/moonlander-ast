@@ -8,6 +8,7 @@ rustc-serialize = "0.3"
 rand = "0.3"
 log = "*"
 toml = "*"
+clap = "*"
 
 [dependencies.moonlander-gp]
 path = "../moonlander-gp"

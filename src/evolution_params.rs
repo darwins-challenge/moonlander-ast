@@ -4,6 +4,13 @@ use std::ffi::OsStr;
 use std::fs::File;
 use std::path::Path;
 use toml;
+use clap::{Arg, App};
+
+#[derive(Debug,RustcDecodable)]
+pub struct RunParams {
+    pub output_every_gen: bool,
+    pub evolution: EvolutionParams,
+}
 
 #[derive(Debug,RustcDecodable)]
 pub struct EvolutionParams {
@@ -30,7 +37,27 @@ pub struct NumRange {
     pub max: Number
 }
 
-pub fn load_params<P: AsRef<OsStr> + ?Sized>(path: &P) -> EvolutionParams {
+pub fn load_params() -> RunParams {
+    let matches = App::new("Genetic Programming Example Program")
+        .about("Evolves a genetic algorithm based on the parameters in the example program")
+        .arg(Arg::with_name("everygen")
+             .short("e")
+             .long("everygen")
+             .help("Writes the champion of every generation to output (otherwise only better champions will be written)"))
+        .arg(Arg::with_name("evofile")
+             .help("TOML file with evolution parameters")
+             .value_name("SCENARIO")
+             .default_value("scenario.toml"))
+        .get_matches();
+
+    RunParams {
+        output_every_gen: matches.is_present("everygen"),
+        evolution: load_evo_params(matches.value_of("evofile").unwrap())
+    }
+}
+
+pub fn load_evo_params<P: AsRef<OsStr> + ?Sized>(path: &P) -> EvolutionParams {
+    println_err!("Opening scenario file {}", path.as_ref().to_str().unwrap());
     let mut f = File::open(Path::new(path)).ok().expect(("Error opening file"));
     let mut s = String::new();
     f.read_to_string(&mut s).ok().expect("Error reading file");
