@@ -48,6 +48,10 @@ to modify everything and anything):
 Scenarios
 ---------
 
+> NOTE: You're free to change the scenario files, but observe that some variables
+> have to be floating point. Don't forget to add in the decimal point, or the
+> program will panic on reading the input file.
+
     1_fixed_vertical_landing.toml
 
 The lander starts at a fixed height, without any rotation, and needs to
