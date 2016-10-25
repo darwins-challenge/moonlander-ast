@@ -17,7 +17,7 @@ fn main() {
     let params = evolution_params::load_params(&args[1]);
     let world = World::new(); // Default settings
 
-    let situation_fn = |rng: &mut rand::Rng| initial_state::vertical_landing(rng);
+    let situation_fn = |rng: &mut rand::Rng| initial_state::from_params(&params, rng);
 
     evolution::run_evolution::<Program, _, _, _>(
         &params,
