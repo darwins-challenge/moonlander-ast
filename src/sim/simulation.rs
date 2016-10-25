@@ -19,13 +19,16 @@ pub fn apply_command(sensor_data: &mut SensorData, command: Command, world: &Wor
     sensor_data.w += angular_multiplier * world.angular_increment;
     sensor_data.o += sensor_data.w;
 
+    sensor_data.thrust_left = command == Command::Left;
+    sensor_data.thrust_right = command == Command::Right;
+
     let thrust_multiplier: Number = match command {
         Command::Thrust => { if sensor_data.fuel > 0.0 { 1.0 } else { 0.0 } },
         _               => 0.0
     };
     let acceleration = thrust_multiplier * world.thrust_constant;
     let ax = -acceleration * sensor_data.o.sin();
-    let ay = acceleration * sensor_data.o.cos() + world.gravitational_constant;
+    let ay =  acceleration * sensor_data.o.cos() + world.gravitational_constant;
     sensor_data.vx += ax;
     sensor_data.vy += ay;
     sensor_data.x += sensor_data.vx;

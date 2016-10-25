@@ -34,8 +34,6 @@ pub fn run_evolution<P, F, FF, S>(params: &RunParams, out: &mut Write, fitness_f
             }
         }
 
-        // The trees depths are creeping upwards. When they've gotten too deep,
-        // take the top 10% of programs and fill up the rest with random trees.
         population = evolve(population, &weights, &mut rng, selector);
     }
 }

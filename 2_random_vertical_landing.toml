@@ -1,5 +1,5 @@
-population_size = 1000
-trials_per_program = 10
+population_size = 2000
+trials_per_program = 5
 tournament_size = 4
 reproduce_weight = 10
 mutate_weight = 20
@@ -7,8 +7,8 @@ crossover_weight = 70
 tree_depth = 6
 
 [start_position.y]
-min = 400.0
-max = 600.0
+min = 50.0
+max = 400.0
 
 [start_position.x]
 min = 0.0

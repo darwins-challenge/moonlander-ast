@@ -10,10 +10,12 @@ pub fn score_lander<P>(program: &P, _: &mut Rng, mut sensor_data: SensorData, wo
     let mut trace : Vec<SensorData> = Vec::with_capacity(100);
     let mut total_height: Number = 0.;
     let mut total_fuel: Number = 0.;
+    let mut total_o : Number = 0.;
 
     trace.push(sensor_data);
     while !sensor_data.hit_ground {
         total_height += square(sensor_data.y);
+        total_o += square(sensor_data.o);
         total_fuel += square(sensor_data.fuel);
 
         let command = program.evaluate(&sensor_data);
@@ -32,7 +34,9 @@ pub fn score_lander<P>(program: &P, _: &mut Rng, mut sensor_data: SensorData, wo
             ("hit_ground_bonus", if sensor_data.hit_ground { 10.0 } else { 0.0 }),
             ("crash_penalty",    sensor_data.crash_speed),
             ("success_bonus",    if sensor_data.landed { 10000.0 } else { 0.0 }),
-            ("complexity_pentalty", depth(program) as f32 * -10.0)
+            ("rotation_penalty",  total_o * -1.0),
+            ("end_rotation_penalty",  square(sensor_data.o) * -100.0),
+            ("complexity_pentalty", square(depth(program) as f32) * -0.0001)
         ])
     }
 }
