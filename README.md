@@ -25,7 +25,7 @@ To run an example, run a command like this:
 
 For example:
 
-    cargo run --release --example simple_condition 1_fixed_vertical_landing.toml > output.json
+    cargo run --release --example evolve_condition 1_fixed_vertical_landing.toml > output.json
 
 This compiles the example and runs it on the given scenario, writing the output
 to a file. The example program will run indefinitely. Feel free to cancel it
@@ -57,7 +57,7 @@ program.
 If the `Condition` evaluates to `true`, the lander will use its thrusters (the
 command will be `Thrust`). If it doesn't, it won't (the command will be `Skip`).
 
-Use the program `simple_condition`, which will try to evolve a program of type
+Use the program `evolve_condition`, which will try to evolve a program of type
 `Condition`.
 
     2_random_vertical_landing.toml
@@ -75,7 +75,7 @@ scenario, it will start at angle.
 
 Using the `Condition`, we could evaluate one of two commands: `Thrust` or
 `Skip`. Once the lander also needs to correct its attitude, those two
-commands are no longer sufficient (check: can `simple_condition` evolve
+commands are no longer sufficient (check: can `evolve_condition` evolve
 a winning solution to this scenario?)
 
 Instead, we'll need a new type of AST node, to increase the range of
