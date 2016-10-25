@@ -32,7 +32,7 @@ pub fn score_lander<P>(program: &P, _: &mut Rng, mut sensor_data: SensorData, wo
             ("hit_ground_bonus", if sensor_data.hit_ground { 10.0 } else { 0.0 }),
             ("crash_penalty",    sensor_data.crash_speed),
             ("success_bonus",    if sensor_data.landed { 10000.0 } else { 0.0 }),
-            ("complexity_pentalty", depth(program) as f32 * -5.0)
+            ("complexity_pentalty", depth(program) as f32 * -10.0)
         ])
     }
 }

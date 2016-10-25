@@ -17,17 +17,21 @@ pub fn run_evolution<P, F, FF, S>(params: &EvolutionParams, out: &mut Write, fit
     let weights = Weights {
         reproduce: params.reproduce_weight,
         mutate: params.mutate_weight,
-        crossover: params.crossover_weight
+        crossover: params.crossover_weight,
+        tree_height: params.tree_depth as i32
     };
 
     loop {
         population.score(fitness_func, &mut rng);
-        println_err!("Generation {:4}, best {:8.1}, average {:8.1}, average depth {:5.1}", population.generation, population.best_score(), population.avg_score(), average_depth(&population));
+        let avg_depth = average_depth(&population);
+        println_err!("Generation {:4}, best {:8.1}, average {:8.1}, average depth {:5.1}", population.generation, population.best_score(), population.avg_score(), avg_depth);
         {
             let champion = population.champion();
             output::write(&champion, out);
         }
 
+        // The trees depths are creeping upwards. When they've gotten too deep,
+        // take the top 10% of programs and fill up the rest with random trees.
         population = evolve(population, &weights, &mut rng, selector);
     }
 }
