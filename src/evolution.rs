@@ -22,7 +22,7 @@ pub fn run_evolution<P, F, FF, S>(params: &EvolutionParams, out: &mut Write, fit
 
     loop {
         population.score(fitness_func, &mut rng);
-        println_err!("Generation {}, best {}, average {}", population.generation, population.best_score(), population.avg_score());
+        println_err!("Generation {:4}, best {:8.1}, average {:8.1}", population.generation, population.best_score(), population.avg_score());
         {
             let champion = population.champion();
             output::write(&champion, out);
