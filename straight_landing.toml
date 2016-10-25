@@ -7,7 +7,7 @@ crossover_weight = 70
 tree_depth = 6
 
 [start_position.y]
-min = 500.0
+min = 400.0
 max = 600.0
 
 [start_position.x]

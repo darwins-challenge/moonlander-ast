@@ -18,5 +18,5 @@ pub fn from_params(params: &EvolutionParams, rng: &mut rand::Rng) -> SensorData 
 }
 
 fn num_from_range(range: &NumRange, rng: &mut rand::Rng) -> Number {
-    range.min + rng.next_f32() % (range.max - range.min)
+    range.min + rng.next_f32() * (range.max - range.min)
 }

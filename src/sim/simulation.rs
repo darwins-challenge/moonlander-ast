@@ -37,7 +37,7 @@ pub fn apply_command(sensor_data: &mut SensorData, command: Command, world: &Wor
     };
     sensor_data.fuel = if sensor_data.fuel > 0.0 { sensor_data.fuel } else { 0.0 };
 
-    let down = sensor_data.y < world.tolerance;
+    let down = sensor_data.y < world.tolerance || sensor_data.y.is_nan();
     let upright = abs(sensor_data.o) < world.max_landing_angle_rads;
     let crashed = abs(sensor_data.vy) > world.max_landing_speed;
     if down && crashed {
