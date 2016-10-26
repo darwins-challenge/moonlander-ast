@@ -1,4 +1,4 @@
-Fly Me To The Moon GP Implementation
+Fly Me To The Moon GP Implementation[![Build Status](https://travis-ci.org/darwins-challenge/moonlander-ast.svg?branch=master)](https://travis-ci.org/darwins-challenge/moonlander-ast)
 ====================================
 
 This crate contains the modeled Genetic Programming implementation of the
