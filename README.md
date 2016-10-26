@@ -41,7 +41,7 @@ to modify everything and anything):
     *.toml                      Scenarios, also containing evolution parameters.
     src/fitness.rs              Fitness function.
     src/grammar/*               All types of AST nodes.
-    src/sim/sensor_ data.rs     You won't necessarily need to touch this file,
+    src/sim/sensor_data.rs      You won't necessarily need to touch this file,
                                 but it's good for reference of values you can
                                 use in your fitness function.
 

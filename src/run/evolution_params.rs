@@ -6,12 +6,14 @@ use std::path::Path;
 use toml;
 use clap::{Arg, App};
 
+/// Parameters to the evolution process.
 #[derive(Debug,RustcDecodable)]
 pub struct RunParams {
     pub output_every_gen: bool,
     pub evolution: EvolutionParams,
 }
 
+/// Parameters of the evolution itself. These are read from a TOML file.
 #[derive(Debug,RustcDecodable)]
 pub struct EvolutionParams {
     pub population_size: usize,
@@ -31,12 +33,14 @@ pub struct StartPosition {
     pub o: NumRange
 }
 
+/// The numerical range for a randomly-generated number.
 #[derive(Debug,RustcDecodable)]
 pub struct NumRange {
     pub min: Number,
     pub max: Number
 }
 
+/// Parse command-line parameters.
 pub fn load_params() -> RunParams {
     let matches = App::new("Genetic Programming Example Program")
         .about("Evolves a genetic algorithm based on the parameters in the example program")

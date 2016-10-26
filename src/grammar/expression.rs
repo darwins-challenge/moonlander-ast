@@ -3,6 +3,10 @@ use super::super::sim::*;
 use moonlander_gp::{Number};
 use rand;
 
+/// Numeric expression.
+///
+/// Either a constant, a sensor value, or an arithmetic operation on two other
+/// numeric expressions.
 #[derive(Debug,RustcDecodable,RustcEncodable,Clone,PartialEq)]
 pub enum Expression {
 	  Constant(Number),

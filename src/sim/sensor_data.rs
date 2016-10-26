@@ -1,21 +1,36 @@
 use moonlander_gp::Number;
 
-/// `SensorData` represents the information that is available for programs to decide what `ast::structure::Command`
-/// to execute when it is evaluated.
+/// `SensorData` represents the information that is available for programs to
+/// decide what `Command` to execute when it is evaluated, plus the values that
+/// are available to the fitness function to calculate a score for the program.
 #[derive(Copy,Clone,RustcEncodable)]
 pub struct SensorData {
+    /// Horizontal position.
     pub x:  Number,
+    /// Vertical position.
     pub y:  Number,
+    /// Horizontal velocity (in units per frame).
     pub vx: Number,
+    /// Vertical velocity (in units per frame).
     pub vy: Number,
+    /// Rotation, in radians.
     pub o:  Number,
+    /// Rotational velocity (in radians per frame).
     pub w:  Number,
+    /// Amount of fuel remaining.
     pub fuel: Number,
+    /// Whether the lander has hit the ground.
     pub hit_ground: bool,
+    /// Whether the lander has succesfully landed.
     pub landed: bool,
+    /// Whether the lander is currently thrusting.
     pub thrusting: bool,
+    /// Whether the lander is using the left booster.
     pub thrust_left: bool,
+    /// Whether the lander is using the right booster.
     pub thrust_right: bool,
+    /// If the lander hit the ground too hard and crashed, the velocity with
+    /// which it hit the ground.
     pub crash_speed: Number
 }
 

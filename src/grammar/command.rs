@@ -1,3 +1,4 @@
+/// The command that the moonlander will execute.
 #[derive(Debug,RustcDecodable,RustcEncodable,Clone,PartialEq,Copy)]
 pub enum Command {
 	Skip,

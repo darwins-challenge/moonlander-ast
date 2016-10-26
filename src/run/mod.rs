@@ -1,3 +1,5 @@
+//! Common evolution-running code between all examples.
+
 #[macro_use]
 mod println_err;
 

@@ -1,6 +1,11 @@
 use super::*;
 use super::super::sim::*;
 
+/// A boolean condition, evaluating to either True or False.
+///
+/// Encodes most of the boolean expressions you would expect,
+/// like `A && B`, `A || B`, plus numeric comparisons like
+/// `X == Y`, `X < Y`, etc.
 #[derive(Debug,RustcDecodable,RustcEncodable,Clone,PartialEq)]
 pub enum Condition {
 	True,

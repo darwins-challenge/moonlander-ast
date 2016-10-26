@@ -3,11 +3,13 @@ use super::super::grammar::*;
 use moonlander_gp::Number;
 use super::super::num::abs;
 
+/// Evaluate a program and apply the resulting command to the simulation.
 pub fn evaluate_program(sensor_data: &mut SensorData, program: &EvaluateToCommand, world: &World) {
     let command = program.evaluate(sensor_data);
     apply_command(sensor_data, command, world);
 }
 
+/// Apply a command to the simulation.
 pub fn apply_command(sensor_data: &mut SensorData, command: Command, world: &World) {
     if sensor_data.hit_ground { return; }
 

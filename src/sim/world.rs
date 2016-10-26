@@ -1,5 +1,6 @@
 use moonlander_gp::Number;
 
+/// Various parameters to the simulation's physics.
 #[derive(Clone,Copy)]
 pub struct World {
     pub angular_increment: Number,

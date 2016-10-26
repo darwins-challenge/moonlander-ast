@@ -18,6 +18,3 @@ pub mod grammar;
 pub mod sim;
 pub mod num;
 pub mod fitness;
-
-// Backwards compatible exports
-pub use self::sim::{initial_state,landing_trace};

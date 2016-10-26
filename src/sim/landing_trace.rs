@@ -3,7 +3,7 @@ use super::SensorData;
 
 pub type Trace = Vec<SensorData>;
 
-/// A single trace and a score for it
+/// A trace of a moonlander's simulation and the corresponding score.
 #[derive(RustcEncodable)]
 pub struct LandingTrace {
     pub trace: Trace,

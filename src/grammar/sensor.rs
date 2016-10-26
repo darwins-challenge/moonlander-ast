@@ -2,6 +2,7 @@ use moonlander_gp::Number;
 use super::super::sim::*;
 
 
+/// The various sensors that the moon lander program can use to base decisions on.
 #[derive(Debug,RustcDecodable,RustcEncodable,Clone,PartialEq,Copy)]
 pub enum Sensor {
       X,
@@ -36,4 +37,3 @@ impl NumericValue for Sensor {
         }
     }
 }
-

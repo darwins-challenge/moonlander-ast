@@ -6,6 +6,10 @@ use moonlander_gp::genetic::{evolve,Weights,Fitness};
 use super::evolution_params::{RunParams};
 use super::output;
 
+/// Run the complete evolution process.
+///
+/// Given evolutionary parameters, a fitness function, and a selection method,
+/// run the complete evolutionary process.
 pub fn run_evolution<P, F, FF, S>(params: &RunParams, out: &mut Write, fitness_func: &FF, selector: &S)
     where P: AstNode+RandNode+Clone+::rustc_serialize::Encodable,
           F: Fitness+::rustc_serialize::Encodable,

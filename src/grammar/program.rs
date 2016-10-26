@@ -1,6 +1,7 @@
 use super::*;
 use super::super::sim::*;
 
+/// A complex program that can decide between more than 2 cases.
 #[derive(Debug,RustcDecodable,RustcEncodable,Clone,PartialEq)]
 pub enum Program {
 	If(Box<Condition>, Box<Program>, Box<Program>),

@@ -1,9 +1,21 @@
-//! This module is dedicated to calculating the fitness of moon landing programs
+//! Calculate the fitness of moon landing programs (MODIFY HERE).
 use moonlander_gp::{AstNode, depth, ScoreCard, Number, Fitness};
 use moonlander_gp::num::square;
 use super::sim::{SensorData, World, apply_command,EvaluateToCommand, LandingTrace};
 use rand::Rng;
 
+/// Calculate the fitness of a single program.
+///
+/// This is done by running a simulation of the program until the moonlander
+/// hits the ground, and scoring the program over the course of the simulation.
+///
+/// Ideally, the fitness function should be as smooth as possible to guide the
+/// evolution in the direction of better solutions.
+///
+/// We return a full trace of all steps of the simulation so that we can
+/// visualize it using the program in the `moonlander-visualization` crate. The
+/// scores can be composed of multiple labeled sub-scores to gauge various parts
+/// of the score of a program.
 pub fn score_lander<P>(program: &P, _: &mut Rng, mut sensor_data: SensorData, world: &World) -> LandingTrace
     where P: EvaluateToCommand+AstNode
 {
@@ -41,9 +53,9 @@ pub fn score_lander<P>(program: &P, _: &mut Rng, mut sensor_data: SensorData, wo
     }
 }
 
-/// Score the lander multiple times and combines the scores
+/// Score the lander multiple times and combine the scores.
 ///
-/// Returns the best trace and the average score
+/// Returns the _best_ trace and the _average_ score.
 pub fn score_lander_multi<P, G>(n: usize, program: &P, rng: &mut Rng, sensor_data_fn: G, world: &World) -> LandingTrace
     where P : EvaluateToCommand+AstNode,
           G : Fn(&mut Rng) -> SensorData

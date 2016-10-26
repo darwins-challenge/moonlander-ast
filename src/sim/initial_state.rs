@@ -1,8 +1,11 @@
+//! Routines to generate starting positions for the moonlander.
+
 use moonlander_gp::Number;
 use super::SensorData;
 use super::super::run::{EvolutionParams, NumRange};
 use rand;
 
+/// Set up a vertical landing state.
 pub fn vertical_landing(rng: &mut rand::Rng) -> SensorData {
     SensorData::new()
         .with_x(0.0)
@@ -10,6 +13,7 @@ pub fn vertical_landing(rng: &mut rand::Rng) -> SensorData {
         .with_o(0.0)
 }
 
+/// Create an initial starting state for the lander from the given parameters.
 pub fn from_params(params: &EvolutionParams, rng: &mut rand::Rng) -> SensorData {
     SensorData::new()
         .with_x(num_from_range(&params.start_position.x, rng))
