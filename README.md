@@ -48,11 +48,7 @@ to modify everything and anything):
 Scenarios
 ---------
 
-> NOTE: You're free to change the scenario files, but observe that some variables
-> have to be floating point. Don't forget to add in the decimal point, or the
-> program will panic on reading the input file.
-
-    1_fixed_vertical_landing.toml
+    1a_fixed_vertical_landing.toml
 
 The lander starts at a fixed height, without any rotation, and needs to
 succesfully land. To solve this scenario, it suffices to evaluate a `Condition`
@@ -64,7 +60,7 @@ command will be `Thrust`). If it doesn't, it won't (the command will be `Skip`).
 Use the program `evolve_condition`, which will try to evolve a program of type
 `Condition`.
 
-    2_random_vertical_landing.toml
+    1b_random_vertical_landing.toml
 
 The previous scenario evolved a program that started at a fixed position.
 However, such a winning program might be overfitting to the problem. In this
@@ -72,7 +68,7 @@ scenario, the lander starts at a random height.
 
 Does your model still evolve a successful solution?
 
-    3_fixed_rotated_landing.toml
+    2a_fixed_rotated_landing.toml
 
 In the previous 2 scenarios, the lander always started upright. In this
 scenario, it will start at angle.
@@ -88,7 +84,7 @@ programs that we can express.
 Can you invent and implement such an AST node? (Don't forget to make a new
 example to evolve it, and don't forget to update the fitness function)
 
-    4_random_rotated_landing.toml
+    2b_random_rotated_landing.toml
 
 In the previous scenario, the starting rotation was fixed. What if the
 starting rotation is randomized? Can we evolve a solution that generalizes?
