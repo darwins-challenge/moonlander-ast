@@ -3,6 +3,22 @@ use super::super::sim::*;
 use moonlander_gp::{AstNode, RandNode, clone_or_replace, NodeWeights};
 use rand;
 
+/// Condition List node
+///
+/// This node is designed to live at the top of the program tree, and contains
+/// an ordered list of `(Condition, Command)` pairs.
+///
+/// The first condition that matches will lead to the corresponding `Command`
+/// being executed.
+///
+/// The advantage of this structure is that _in theory_ it will have better
+/// localized crossover and mutation properties (although localized crossover by
+/// splicing in the middle of the condition list is currently not possible in
+/// the `moonlander_gp` framework).
+///
+/// Downside of this node type is that it's not an enum, and so the
+/// `impl_astnode!` macro will not work for it. All traits have to be
+/// implemented manually.
 #[derive(Debug,RustcDecodable,RustcEncodable,Clone,PartialEq)]
 pub struct CondList(pub Vec<(Box<Condition>, Command)>);
 

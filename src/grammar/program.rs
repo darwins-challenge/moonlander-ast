@@ -1,7 +1,11 @@
 use super::*;
 use super::super::sim::*;
 
-/// A complex program that can decide between more than 2 cases.
+/// The root of a complex program that can decide between more than 2 cases.
+///
+/// A program is a recursive `if-then-else` statement that can pick between
+/// alternatives based on a condition. It is hierarchical so that multiple
+/// comparisons can be chained.
 #[derive(Debug,RustcDecodable,RustcEncodable,Clone,PartialEq)]
 pub enum Program {
 	If(Box<Condition>, Box<Program>, Box<Program>),

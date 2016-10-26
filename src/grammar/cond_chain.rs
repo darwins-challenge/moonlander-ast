@@ -1,6 +1,18 @@
 use super::*;
 use super::super::sim::*;
 
+/// Condition list in the form of an AST node
+///
+/// This is a reimplementation of `CondList`, as an enum with chained
+/// nodes. This node has the same expressiveness as the `CondList`,
+/// but has the advantage that it _can_ do crossover splicing between
+/// parents in the current evolutionary framework.
+///
+/// A downside of this node type is that the programs tend to grow
+/// without bounds, as there is no height control on the crossover
+/// operation and crossovers tend to be done most of the time. This
+/// leads to a population that quickly grows outside bounds, reducing
+/// evolutionary and computational performance.
 #[derive(Debug,RustcDecodable,RustcEncodable,Clone,PartialEq)]
 pub enum CondChain {
     Cond(Box<Condition>, Box<Command>, Box<CondChain>),
