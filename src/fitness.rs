@@ -20,15 +20,13 @@ pub fn score_lander<P>(program: &P, _: &mut Rng, mut sensor_data: SensorData, wo
     where P: EvaluateToCommand+AstNode
 {
     let mut trace : Vec<SensorData> = Vec::with_capacity(100);
-    let mut total_height: Number = 0.;
+
+    // Tally some information per frame
     let mut total_fuel: Number = 0.;
-    let mut total_o : Number = 0.;
 
     trace.push(sensor_data);
     while !sensor_data.hit_ground {
-        total_height += square(sensor_data.y);
-        total_o += square(sensor_data.o);
-        total_fuel += square(sensor_data.fuel);
+        total_fuel += sensor_data.fuel;
 
         let command = program.evaluate(&sensor_data);
         apply_command(&mut sensor_data, command, world);
@@ -40,15 +38,9 @@ pub fn score_lander<P>(program: &P, _: &mut Rng, mut sensor_data: SensorData, wo
     LandingTrace {
         trace: trace,
         score_card: ScoreCard::new(vec![
+            // TODO: You might want to add in new scoring factors here.
             ("survival_bonus",   3.0 * frames),
-            ("height_penalty",   -(0.01 * total_height / frames)),
-            ("fuel_bonus",        (100.0 * total_fuel / frames)),
-            ("hit_ground_bonus", if sensor_data.hit_ground { 10.0 } else { 0.0 }),
-            ("crash_penalty",    sensor_data.crash_speed),
-            ("success_bonus",    if sensor_data.landed { 10000.0 } else { 0.0 }),
-            ("rotation_penalty",  total_o * -1.0),
-            ("end_rotation_penalty",  square(sensor_data.o) * -100.0),
-            ("complexity_pentalty", square(depth(program) as f32) * -0.001)
+            ("fuel_bonus",       (100.0 * total_fuel / frames)),
         ])
     }
 }
