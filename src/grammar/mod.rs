@@ -17,3 +17,6 @@ pub use self::sensor::Sensor;
 
 mod cond_list;
 pub use self::cond_list::CondList;
+
+mod cond_chain;
+pub use self::cond_chain::CondChain;
