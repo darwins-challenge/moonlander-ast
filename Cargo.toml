@@ -11,4 +11,4 @@ toml = "*"
 clap = "*"
 
 [dependencies.moonlander-gp]
-path = "../../moonlander-gp"
+path = "../moonlander-gp"
