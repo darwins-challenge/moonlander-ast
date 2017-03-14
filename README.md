@@ -45,6 +45,44 @@ to modify everything and anything):
                                 but it's good for reference of values you can
                                 use in your fitness function.
 
+You'll need to know the sensors that are available to the moon lander. To see
+what fields are available on the `sensor_data` struct, either look at the source
+file (`src/sim/sensor_data.rs`) or the generated API documentation.
+
+Current Grammar
+---------------
+
+The starting grammar of the moonlander looks like this:
+
+    Sensor := X | Y | Vx | Vy | O | W | Fuel
+
+    Command := Skip | Left | Right | Thrust
+
+    Expression := Constant(Number)
+                | Sensor(Sensor)
+                | Plus(Expression, Expression)
+                | Minus(Expression, Expression)
+                | Multiply(Expression, Expression)
+                | Divide(Expression, Expression)
+
+    Condition := True | False
+
+               | Not(Condition)
+               | Or(Condition)
+               | And(Condition)
+
+               | Less(Expression, Expression)
+               | LessEqual(Expression, Expression)
+               | Equal(Expression, Expression)
+               | GreaterEqual(Expression, Expression)
+               | Greater(Expression, Expression)
+
+For the first assignment, producing an AST of type `Condition` (i.e.,
+the top-level node is a `Condition`) is sufficient.
+
+For the second assignment, you'll need to extend the grammar with a new
+node type.
+
 Scenarios
 ---------
 
@@ -52,7 +90,7 @@ Scenarios
 > have to be floating point. Don't forget to add in the decimal point, or the
 > program will panic on reading the input file.
 
-    1_fixed_vertical_landing.toml
+**1_fixed_vertical_landing.toml**
 
 The lander starts at a fixed height, without any rotation, and needs to
 succesfully land. To solve this scenario, it suffices to evaluate a `Condition`
@@ -64,7 +102,7 @@ command will be `Thrust`). If it doesn't, it won't (the command will be `Skip`).
 Use the program `evolve_condition`, which will try to evolve a program of type
 `Condition`.
 
-    2_random_vertical_landing.toml
+**2_random_vertical_landing.toml**
 
 The previous scenario evolved a program that started at a fixed position.
 However, such a winning program might be overfitting to the problem. In this
@@ -72,7 +110,7 @@ scenario, the lander starts at a random height.
 
 Does your model still evolve a successful solution?
 
-    3_fixed_rotated_landing.toml
+**3_fixed_rotated_landing.toml**
 
 In the previous 2 scenarios, the lander always started upright. In this
 scenario, it will start at angle.
@@ -88,7 +126,7 @@ programs that we can express.
 Can you invent and implement such an AST node? (Don't forget to make a new
 example to evolve it, and don't forget to update the fitness function)
 
-    4_random_rotated_landing.toml
+**4_random_rotated_landing.toml**
 
 In the previous scenario, the starting rotation was fixed. What if the
 starting rotation is randomized? Can we evolve a solution that generalizes?
