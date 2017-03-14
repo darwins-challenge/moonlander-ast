@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["TAU",""]],"fn":[["abs","Return the absolute value of a number"],["angle_dist","Calculate the distance between two angles"],["square",""]]});

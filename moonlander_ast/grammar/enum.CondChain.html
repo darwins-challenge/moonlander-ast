@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `CondChain` enum in crate `moonlander_ast`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, CondChain">
+
+    <title>moonlander_ast::grammar::CondChain - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>moonlander_ast</a>::<wbr><a href='index.html'>grammar</a></p><script>window.sidebarCurrent = {name: 'CondChain', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>moonlander_ast</a>::<wbr><a href='index.html'>grammar</a>::<wbr><a class='enum' href=''>CondChain</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-1219' class='srclink' href='../../src/moonlander_ast/src/grammar/cond_chain.rs.html#17-20' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum CondChain {
+    Cond(<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='enum' href='../../moonlander_ast/grammar/enum.Condition.html' title='moonlander_ast::grammar::Condition'>Condition</a>&gt;,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='enum' href='../../moonlander_ast/grammar/enum.Command.html' title='moonlander_ast::grammar::Command'>Command</a>&gt;,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a>&gt;),
+    Stop,
+}</pre><div class='docblock'><p>Condition list in the form of an AST node</p>
+
+<p>This is a reimplementation of <code>CondList</code>, as an enum with chained
+nodes. This node has the same expressiveness as the <code>CondList</code>,
+but has the advantage that it <em>can</em> do crossover splicing between
+parents in the current evolutionary framework.</p>
+
+<p>A downside of this node type is that the programs tend to grow
+without bounds, as there is no height control on the crossover
+operation and crossovers tend to be done most of the time. This
+leads to a population that quickly grows outside bounds, reducing
+evolutionary and computational performance.</p>
+</div><h2 class='variants'>Variants</h2>
+<span id='variant.Cond' class='variant'><span id='Cond.v' class='invisible'><code>Cond(<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='enum' href='../../moonlander_ast/grammar/enum.Condition.html' title='moonlander_ast::grammar::Condition'>Condition</a>&gt;,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='enum' href='../../moonlander_ast/grammar/enum.Command.html' title='moonlander_ast::grammar::Command'>Command</a>&gt;,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a>&gt;)</code></span></span><span id='variant.Stop' class='variant'><span id='Stop.v' class='invisible'><code>Stop</code></span></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1225' class='srclink' href='../../src/moonlander_ast/src/grammar/cond_chain.rs.html#16' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../rustc_serialize/serialize/trait.Decodable.html' title='rustc_serialize::serialize::Decodable'>Decodable</a> for <a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1234' class='srclink' href='../../src/moonlander_ast/src/grammar/cond_chain.rs.html#16' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.decode' class='method'><span id='decode.v' class='invisible'><code>fn <a href='../../rustc_serialize/serialize/trait.Decodable.html#tymethod.decode' class='fnname'>decode</a>&lt;__D:&nbsp;<a class='trait' href='../../rustc_serialize/serialize/trait.Decoder.html' title='rustc_serialize::serialize::Decoder'>Decoder</a>&gt;(__arg_0: &amp;mut __D) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a>,&nbsp;__D::Error&gt;</code></span></h4>
+</div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../rustc_serialize/serialize/trait.Encodable.html' title='rustc_serialize::serialize::Encodable'>Encodable</a> for <a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1249' class='srclink' href='../../src/moonlander_ast/src/grammar/cond_chain.rs.html#16' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.encode' class='method'><span id='encode.v' class='invisible'><code>fn <a href='../../rustc_serialize/serialize/trait.Encodable.html#tymethod.encode' class='fnname'>encode</a>&lt;__S:&nbsp;<a class='trait' href='../../rustc_serialize/serialize/trait.Encoder.html' title='rustc_serialize::serialize::Encoder'>Encoder</a>&gt;(&amp;self, __arg_0: &amp;mut __S) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>,&nbsp;__S::Error&gt;</code></span></h4>
+</div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1277' class='srclink' href='../../src/moonlander_ast/src/grammar/cond_chain.rs.html#16' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class='method'><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a></code></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class='method'><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1283' class='srclink' href='../../src/moonlander_ast/src/grammar/cond_chain.rs.html#16' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class='method'><span id='eq.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></span></h4>
+<div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
+</div><h4 id='method.ne' class='method'><span id='ne.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></span></h4>
+<div class='docblock'><p>This method tests for <code>!=</code>.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../moonlander_gp/ast/trait.AstNode.html' title='moonlander_gp::ast::AstNode'>AstNode</a> for <a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a></code></span><span class='out-of-band'></span></h3>
+<div class='impl-items'><h4 id='method.node_type' class='method'><span id='node_type.v' class='invisible'><code>fn <a href='../../moonlander_gp/ast/trait.AstNode.html#tymethod.node_type' class='fnname'>node_type</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></span></h4>
+<div class='docblock'><p>Identify the node type, because Any::get_type_id() is unstable.</p>
+</div><h4 id='method.children' class='method'><span id='children.v' class='invisible'><code>fn <a href='../../moonlander_gp/ast/trait.AstNode.html#tymethod.children' class='fnname'>children</a>(&amp;self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;&amp;<a class='trait' href='../../moonlander_gp/ast/trait.AstNode.html' title='moonlander_gp::ast::AstNode'>AstNode</a>&gt;</code></span></h4>
+<div class='docblock'><p>Return all children of this node.</p>
+</div><h4 id='method.replace_child' class='method'><span id='replace_child.v' class='invisible'><code>fn <a href='../../moonlander_gp/ast/trait.AstNode.html#tymethod.replace_child' class='fnname'>replace_child</a>(&amp;self, _old_child: &amp;<a class='trait' href='../../moonlander_gp/ast/trait.AstNode.html' title='moonlander_gp::ast::AstNode'>AstNode</a>, _new_child: &amp;mut <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../moonlander_gp/ast/trait.AstNode.html' title='moonlander_gp::ast::AstNode'>AstNode</a>&gt;&gt;) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../moonlander_gp/ast/trait.AstNode.html' title='moonlander_gp::ast::AstNode'>AstNode</a>&gt;</code></span></h4>
+<div class='docblock'><p>Return a copy of this node with a single child node replaced.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../moonlander_gp/random_pop/trait.RandNode.html' title='moonlander_gp::random_pop::RandNode'>RandNode</a> for <a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a></code></span><span class='out-of-band'></span></h3>
+<div class='impl-items'><h4 id='method.rand' class='method'><span id='rand.v' class='invisible'><code>fn <a href='../../moonlander_gp/random_pop/trait.RandNode.html#tymethod.rand' class='fnname'>rand</a>(weights: <a class='struct' href='../../moonlander_gp/random_pop/struct.NodeWeights.html' title='moonlander_gp::random_pop::NodeWeights'>NodeWeights</a>, rng: &amp;mut <a class='trait' href='../../rand/trait.Rng.html' title='rand::Rng'>Rng</a>) -&gt; <a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a></code></span></h4>
+</div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../moonlander_ast/sim/trait.EvaluateToCommand.html' title='moonlander_ast::sim::EvaluateToCommand'>EvaluateToCommand</a> for <a class='enum' href='../../moonlander_ast/grammar/enum.CondChain.html' title='moonlander_ast::grammar::CondChain'>CondChain</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1330' class='srclink' href='../../src/moonlander_ast/src/grammar/cond_chain.rs.html#26-39' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.evaluate' class='method'><span id='evaluate.v' class='invisible'><code>fn <a href='../../moonlander_ast/sim/trait.EvaluateToCommand.html#tymethod.evaluate' class='fnname'>evaluate</a>(&amp;self, sensor_data: &amp;<a class='struct' href='../../moonlander_ast/sim/struct.SensorData.html' title='moonlander_ast::sim::SensorData'>SensorData</a>) -&gt; <a class='enum' href='../../moonlander_ast/grammar/enum.Command.html' title='moonlander_ast::grammar::Command'>Command</a></code></span></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "moonlander_ast";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>

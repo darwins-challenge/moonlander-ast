@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["score_lander","Calculate the fitness of a single program."],["score_lander_multi","Score the lander multiple times and combine the scores."]]});
