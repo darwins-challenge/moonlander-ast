@@ -9,7 +9,7 @@ fi
 rev=$(git rev-parse --short HEAD)
 
 cd target/doc
-echo '<meta http-equiv=refresh content=0;url=/moonlander-ast/ast/index.html>' > index.html
+echo '<meta http-equiv=refresh content=0;url=/moonlander-ast/moonlander_ast/index.html>' > index.html
 
 git init
 git config user.name "Daan van Berkel"
