@@ -100,27 +100,32 @@ There are the scenario's you can try for the assignments.
 This assignment can be solved by taking the existing code, and just changing the
 fitness function to correctly incentivize/guide the genetic search. Do this
 by combining the various features available on the `SensorData` object, with
-weights.
+weights. You may have to play around a bit with the numbers; look at the
+relative scores that some example traces of your program got in the visualizer.
 
 **1_fixed_vertical_landing.toml**
 
 The lander starts at a fixed height, without any rotation, and needs to
-succesfully land. To solve this scenario, it suffices to evaluate a `Condition`
-program.
+land successfully. The only decision the program will need to make to
+land correctly is for each frame to decide on this question: _whether or not to
+use the thruster_.
 
-If the `Condition` evaluates to `true`, the lander will use its thrusters (the
-command will be `Thrust`). If it doesn't, it won't (the command will be `Skip`).
+To solve this scenario, it suffices to evaluate a `Condition` program. If the
+`Condition` evaluates to `true`, the lander will use its thrusters (the command
+will be `Thrust`). If it doesn't, it won't (the command will be `Skip`).
 
-Use the program `evolve_condition`, which will try to evolve a program of type
-`Condition`.
+Run the example program `evolve_condition`, which will try to evolve a program
+of type `Condition`.
 
 **2_random_vertical_landing.toml**
 
 The previous scenario evolved a program that started at a fixed position.
-However, such a winning program might be overfitting to the problem. In this
-scenario, the lander starts at a random height.
+However, such a winning program might be overfitting to the problem. That is,
+it may have learned perfectly how to land from a given height, but fail
+when it is started at any other height.
 
-Does your model still evolve a successful solution?
+Run the program again, but use this scenario. Does your model still evolve a
+successful solution? Does the evolved program look any different?
 
 ### Second assignment, rotated landing
 
@@ -129,7 +134,7 @@ Does your model still evolve a successful solution?
 In the previous 2 scenarios, the lander always started upright. In this
 scenario, it will start at angle.
 
-Using the `Condition`, we could evaluate one of two commands: `Thrust` or
+Using the `Condition`, we could evaluate to one of two commands: `Thrust` or
 `Skip`. Once the lander also needs to correct its attitude, those two commands
 are no longer sufficient You can verify this yourself, just try it: can the
 example orgram `evolve_condition` evolve a winning solution to scenario 3?
