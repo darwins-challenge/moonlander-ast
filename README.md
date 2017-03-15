@@ -1,5 +1,7 @@
-Fly Me To The Moon GP Implementation[![Build Status](https://travis-ci.org/darwins-challenge/moonlander-ast.svg?branch=master)](https://travis-ci.org/darwins-challenge/moonlander-ast)
-====================================
+Fly Me To The Moon Genetic Programming Assignments
+==================================================
+
+[![Build Status](https://travis-ci.org/darwins-challenge/moonlander-ast.svg?branch=master)](https://travis-ci.org/darwins-challenge/moonlander-ast), but ignore that :P.
 
 This crate contains the modeled Genetic Programming implementation of the
 Moonlander Problem.
@@ -86,9 +88,19 @@ node type.
 Scenarios
 ---------
 
+There are the scenario's you can try for the assignments.
+
 > NOTE: You're free to change the scenario files, but observe that some variables
 > have to be floating point. Don't forget to add in the decimal point, or the
 > program will panic on reading the input file.
+
+
+### First assignment, straight landing
+
+This assignment can be solved by taking the existing code, and just changing the
+fitness function to correctly incentivize/guide the genetic search. Do this
+by combining the various features available on the `SensorData` object, with
+weights.
 
 **1_fixed_vertical_landing.toml**
 
@@ -110,26 +122,64 @@ scenario, the lander starts at a random height.
 
 Does your model still evolve a successful solution?
 
+### Second assignment, rotated landing
+
 **3_fixed_rotated_landing.toml**
 
 In the previous 2 scenarios, the lander always started upright. In this
 scenario, it will start at angle.
 
 Using the `Condition`, we could evaluate one of two commands: `Thrust` or
-`Skip`. Once the lander also needs to correct its attitude, those two
-commands are no longer sufficient (check: can `evolve_condition` evolve
-a winning solution to this scenario?)
+`Skip`. Once the lander also needs to correct its attitude, those two commands
+are no longer sufficient You can verify this yourself, just try it: can the
+example orgram `evolve_condition` evolve a winning solution to scenario 3?
 
-Instead, we'll need a new type of AST node, to increase the range of
-programs that we can express.
+To solve this problem, you'll need to extend the grammar with a new type of
+node, so that the program that gets generated can make more than 2 choices: it
+should also be able to answer with `Left` or `Right`.
 
-Can you invent and implement such an AST node? (Don't forget to make a new
-example to evolve it, and don't forget to update the fitness function)
+Can you invent and implement such an AST node? Think of what the form of the
+new node should be, then model it.
+
+See the section "_Implementing an AST Node_" for more information on how to
+prepare the AST node structure for our genetic programming framework.
 
 **4_random_rotated_landing.toml**
 
 In the previous scenario, the starting rotation was fixed. What if the
 starting rotation is randomized? Can we evolve a solution that generalizes?
+
+Implementing an AST Node
+------------------------
+
+- AST nodes should have the following traits: `Debug`, `RustcEncodable`,
+  `RustcDecodable`, `Clone`, `PartialEq`, `AstNode`, `RandNode`. The former 5
+  can be derived, for the latter 2 we have a macro called `impl_astnode!()`.
+- `impl_astnode!()` takes an integer that should be unique among all node types
+  (pick 4 or a higher number), and a description of all variant cases of the
+  enum of your AST node type. Each AST node arm is labeled with `leaf` to
+  indicate it's a "leaf" node of the AST tree, or `int` to indicate it's an
+  "internal" node (meaning it has other AST nodes as children). This labeling is
+  used to limit the depth of the tree: while randomly generating trees, we'll
+  reduce the chances of picking an internal node as we go deeper in the tree, so
+  we don't recurse infinitely.
+- For your particular new AST Node, which needs to produce a `Command`, you'll
+  also want to implement `EvaluateToComamnd`. This is the interesting trait,
+  which will describe how the node should be evaluated by the simulation engine.
+- Your node type probably wants to contain nodes of other types: `Condition`,
+  which implements `BooleanValue` with a method `is_true()`, or `Expression`
+  which implements `NumericValue`, with method `num_value`. See the `doc`
+  directory for the API documentation.
+- You'll also need to add a new `example` program to run it. The simplest
+  way to do that is to copy/paste `evolve_condition`, and search/replacing
+  the `Condition` type with your new type.
+
+
+The `EvaluateToCommand` trait looks like this:
+
+    pub trait EvaluateToCommand {
+        fn evaluate(&self, sensor_data: &SensorData) -> Command;
+    }
 
 Prerequisites
 -------------
